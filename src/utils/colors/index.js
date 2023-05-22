@@ -1,0 +1,21 @@
+export const colors = {
+  primary: '#1AB4E4',
+  secondary: '#CC4B42',
+  tertiary: '#54C05F',
+  foourty: '#494F4A',
+  background: '#0090D4',
+  success: '#7FFF00',
+  warning: '#FFBA49',
+  danger: '#FF0000',
+  black: 'black',
+  white: 'white',
+  border: '#A9A9A9',
+  zavalabs: '#D9D9D94D',
+  border2: '#00000033',
+  myicon: '#4090C9',
+  mybutton: '#1466BF',
+  myback: '#F5F5F5',
+  myback2: '#B1D4E0',
+  myback3: '#F4F6FF',
+  text: '#494F4A'
+};
