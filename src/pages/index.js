@@ -68,14 +68,18 @@ import BeliAdd from './BeliAdd';
 import BeliCart from './BeliCart';
 import BeliDetail from './BeliDetail';
 import BeliAddDetail from './BeliAddDetail';
+import LaporanBeli from './LaporanBeli';
+import LaporanJual from './LaporanJual';
+import MasterAkun from './MasterAkun';
+import MasterAkunAdd from './MasterAkunAdd';
+import MasterAkunDetail from './MasterAkunDetail';
+import MasterAkunEdit from './MasterAkunEdit';
 
 
 
 
 
 // NEW APK SAMPAH
-
-
 
 
 
@@ -181,6 +185,18 @@ export {
   BeliAdd,
   BeliCart,
   BeliDetail,
-  BeliAddDetail
+  BeliAddDetail,
+
+  // Laporan
+
+  LaporanJual,
+  LaporanBeli,
+  // master akun
+
+  MasterAkun,
+  MasterAkunAdd,
+  MasterAkunDetail,
+  MasterAkunEdit
+
 
 };

@@ -42,6 +42,7 @@ export default function MasterMenu({ navigation }) {
             <MyList l="BSU" onPress={() => navigation.navigate('MasterBSU')} />
             <MyList l="Produk Bank Sampah" onPress={() => navigation.navigate('MasterProduk')} />
             <MyList l="Kategori Bank Sampah" onPress={() => navigation.navigate('MasterKategori')} />
+            <MyList l="Akun" onPress={() => navigation.navigate('MasterAkun')} />
 
 
         </SafeAreaView>

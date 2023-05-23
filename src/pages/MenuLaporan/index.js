@@ -38,8 +38,8 @@ export default function MenuLaporan({ navigation }) {
             padding: 10,
         }}>
 
-            <MyList l="Penjualan Daur Ulang" onPress={() => navigation.navigate('Jual')} />
-            <MyList l="Pembelian" onPress={() => navigation.navigate('Beli')} />
+            <MyList l="Penjualan Daur Ulang" onPress={() => navigation.navigate('LaporanJual')} />
+            <MyList l="Pembelian" onPress={() => navigation.navigate('LaporanBeli')} />
 
 
 

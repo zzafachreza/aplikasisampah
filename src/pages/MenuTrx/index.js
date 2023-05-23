@@ -1,7 +1,8 @@
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { colors, fonts } from '../../utils'
 import { Icon } from 'react-native-elements'
+import { getData } from '../../utils/localStorage'
 
 
 const MyList = ({ l, onPress }) => {
@@ -31,6 +32,15 @@ const MyList = ({ l, onPress }) => {
 }
 
 export default function MenuTrx({ navigation }) {
+
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        getData('user').then(u => {
+            setUser(u);
+        })
+    }, [])
     return (
         <SafeAreaView style={{
             flex: 1,
@@ -39,8 +49,11 @@ export default function MenuTrx({ navigation }) {
         }}>
 
             <MyList l="Penjemputan" onPress={() => navigation.navigate('Jemput')} />
-            <MyList l="Pembelian" onPress={() => navigation.navigate('Beli')} />
-            <MyList l="Penjualan" onPress={() => navigation.navigate('Jual')} />
+
+            {user.level == 'Admin' && <>
+                <MyList l="Pembelian" onPress={() => navigation.navigate('Beli')} />
+                <MyList l="Penjualan" onPress={() => navigation.navigate('Jual')} />
+            </>}
 
 
 

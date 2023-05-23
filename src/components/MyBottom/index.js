@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { colors, fonts, windowWidth } from '../../utils';
 import { useNavigation } from '@react-navigation/native';
+import { getData } from '../../utils/localStorage';
 
 
 export default function MyBottom({ menu }) {
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        getData('user').then(u => {
+            setUser(u);
+        })
+    }, [])
 
     const navigation = useNavigation();
     return (
@@ -33,7 +42,8 @@ export default function MyBottom({ menu }) {
                 }}>Beranda</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('MasterMenu')} style={{
+
+            {user.level == 'Admin' && <TouchableOpacity onPress={() => navigation.navigate('MasterMenu')} style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center'
@@ -48,7 +58,7 @@ export default function MyBottom({ menu }) {
                     color: colors.foourty,
                     fontSize: 12,
                 }}>Master</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
 
             <TouchableOpacity onPress={() => navigation.navigate('MenuTrx')} style={{
                 flex: 1,
@@ -67,7 +77,7 @@ export default function MyBottom({ menu }) {
                 }}>Transaksi</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('MenuLaporan')} style={{
+            {user.level == 'Admin' && <TouchableOpacity onPress={() => navigation.navigate('MenuLaporan')} style={{
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center'
@@ -82,7 +92,9 @@ export default function MyBottom({ menu }) {
                     color: colors.foourty,
                     fontSize: 12,
                 }}>Laporan</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>}
+
+
 
             <TouchableOpacity onPress={() => navigation.navigate('AAAtur')} style={{
                 flex: 1,

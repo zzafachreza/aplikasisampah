@@ -131,150 +131,153 @@ export default function HomeAdmin({ navigation }) {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        {user.level == 'Admin' && <>
+
+          <TouchableOpacity>
+            <View style={{
+              borderRadius: 10,
+              marginHorizontal: 10,
+              marginVertical: 10,
+              padding: 10,
+              backgroundColor: '#9747FF',
+              flexDirection: 'row'
+            }}>
+              <View style={{
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <Image source={require('../../assets/sdeks.png')} style={{
+                  width: 40,
+                  height: 40,
+                  resizeMode: 'contain'
+                }} />
+              </View>
+              <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'flex-end'
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 20,
+                  color: colors.white
+                }}>Penimbangan</Text>
+                <Text style={{
+                  fontFamily: fonts.secondary[800],
+                  fontSize: 40,
+                  color: colors.white
+                }}>{info.timbang}</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+
           <View style={{
-            borderRadius: 10,
+            flexDirection: 'row',
             marginHorizontal: 10,
-            marginVertical: 10,
-            padding: 10,
-            backgroundColor: '#9747FF',
-            flexDirection: 'row'
           }}>
-            <View style={{
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
-              <Image source={require('../../assets/sdeks.png')} style={{
-                width: 40,
-                height: 40,
-                resizeMode: 'contain'
-              }} />
-            </View>
-            <View style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'flex-end'
-            }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 20,
-                color: colors.white
-              }}>Penimbangan</Text>
-              <Text style={{
-                fontFamily: fonts.secondary[800],
-                fontSize: 40,
-                color: colors.white
-              }}>{info.timbang}</Text>
-            </View>
+            <TouchableNativeFeedback>
+              <View style={{
+                flex: 1,
+                marginRight: 10,
+                backgroundColor: '#1AB4E4',
+                padding: 10,
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+                borderRadius: 10,
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 20,
+                  color: colors.white
+                }}>Produk Daur Ulang</Text>
+                <Text style={{
+                  fontFamily: fonts.secondary[800],
+                  fontSize: 40,
+                  color: colors.white
+                }}>{info.barang}</Text>
+              </View>
+            </TouchableNativeFeedback>
+
+            <TouchableNativeFeedback>
+              <View style={{
+                flex: 1,
+                marginLeft: 10,
+                backgroundColor: '#CC4B42',
+                padding: 10,
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+                borderRadius: 10,
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 20,
+                  color: colors.white
+                }}>BSU</Text>
+                <Text style={{
+                  fontFamily: fonts.secondary[800],
+                  fontSize: 40,
+                  color: colors.white
+                }}>{info.bsu}</Text>
+              </View>
+            </TouchableNativeFeedback>
           </View>
-        </TouchableOpacity>
 
+          <View style={{
+            marginTop: 10,
+            flexDirection: 'row',
+            marginHorizontal: 10,
+          }}>
+            <TouchableNativeFeedback>
+              <View style={{
+                flex: 1,
+                marginRight: 10,
+                backgroundColor: '#E47B1A',
+                padding: 10,
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+                borderRadius: 10,
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 20,
+                  color: colors.white,
+                  textAlign: 'right',
+                }}>Produk Bank Sampah</Text>
+                <Text style={{
+                  fontFamily: fonts.secondary[800],
+                  fontSize: 40,
+                  color: colors.white
+                }}>{info.produk}</Text>
+              </View>
+            </TouchableNativeFeedback>
 
-        <View style={{
-          flexDirection: 'row',
-          marginHorizontal: 10,
-        }}>
-          <TouchableNativeFeedback>
-            <View style={{
-              flex: 1,
-              marginRight: 10,
-              backgroundColor: '#1AB4E4',
-              padding: 10,
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-              borderRadius: 10,
-            }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 20,
-                color: colors.white
-              }}>Produk Daur Ulang</Text>
-              <Text style={{
-                fontFamily: fonts.secondary[800],
-                fontSize: 40,
-                color: colors.white
-              }}>{info.barang}</Text>
-            </View>
-          </TouchableNativeFeedback>
-
-          <TouchableNativeFeedback>
-            <View style={{
-              flex: 1,
-              marginLeft: 10,
-              backgroundColor: '#CC4B42',
-              padding: 10,
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-              borderRadius: 10,
-            }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 20,
-                color: colors.white
-              }}>BSU</Text>
-              <Text style={{
-                fontFamily: fonts.secondary[800],
-                fontSize: 40,
-                color: colors.white
-              }}>{info.bsu}</Text>
-            </View>
-          </TouchableNativeFeedback>
-        </View>
-
-        <View style={{
-          marginTop: 10,
-          flexDirection: 'row',
-          marginHorizontal: 10,
-        }}>
-          <TouchableNativeFeedback>
-            <View style={{
-              flex: 1,
-              marginRight: 10,
-              backgroundColor: '#E47B1A',
-              padding: 10,
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-              borderRadius: 10,
-            }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 20,
-                color: colors.white,
-                textAlign: 'right',
-              }}>Produk Bank Sampah</Text>
-              <Text style={{
-                fontFamily: fonts.secondary[800],
-                fontSize: 40,
-                color: colors.white
-              }}>{info.produk}</Text>
-            </View>
-          </TouchableNativeFeedback>
-
-          <TouchableNativeFeedback>
-            <View style={{
-              flex: 1,
-              marginLeft: 10,
-              backgroundColor: '#54C05F',
-              padding: 10,
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-              borderRadius: 10,
-            }}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: 20,
-                color: colors.white,
-                textAlign: 'right',
-              }}>Kategori Bank
-                Sampah</Text>
-              <Text style={{
-                fontFamily: fonts.secondary[800],
-                fontSize: 40,
-                color: colors.white
-              }}>{info.kategori}</Text>
-            </View>
-          </TouchableNativeFeedback>
-        </View>
+            <TouchableNativeFeedback>
+              <View style={{
+                flex: 1,
+                marginLeft: 10,
+                backgroundColor: '#54C05F',
+                padding: 10,
+                alignItems: 'flex-end',
+                justifyContent: 'center',
+                borderRadius: 10,
+              }}>
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: 20,
+                  color: colors.white,
+                  textAlign: 'right',
+                }}>Kategori Bank
+                  Sampah</Text>
+                <Text style={{
+                  fontFamily: fonts.secondary[800],
+                  fontSize: 40,
+                  color: colors.white
+                }}>{info.kategori}</Text>
+              </View>
+            </TouchableNativeFeedback>
+          </View>
+        </>}
 
 
       </View>

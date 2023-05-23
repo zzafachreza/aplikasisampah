@@ -61,6 +61,12 @@ import {
   BeliCart,
   BeliDetail,
   BeliAddDetail,
+  LaporanBeli,
+  LaporanJual,
+  MasterAkun,
+  MasterAkunDetail,
+  MasterAkunAdd,
+  MasterAkunEdit
 } from '../pages';
 import { colors } from '../utils';
 import { Icon } from 'react-native-elements';
@@ -282,6 +288,59 @@ export default function Router() {
         }}
       />
 
+      {/* CRUD AKUN */}
+      <Stack.Screen
+        name="MasterAkun"
+        component={MasterAkun}
+        options={{
+          headerShown: true,
+          headerTitle: 'Akun',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="MasterAkunDetail"
+        component={MasterAkunDetail}
+        options={{
+          headerShown: true,
+          headerTitle: 'Detail Akun',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="MasterAkunAdd"
+        component={MasterAkunAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Tambah Akun',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="MasterAkunEdit"
+        component={MasterAkunEdit}
+        options={{
+          headerShown: true,
+          headerTitle: 'Edit Akun',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
       {/* CRUD BARANG */}
       <Stack.Screen
         name="MasterBarang"
@@ -481,6 +540,35 @@ export default function Router() {
         options={{
           headerShown: false,
           headerTitle: 'Detail Pembelian',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      {/* LAPORAN */}
+
+      <Stack.Screen
+        name="LaporanJual"
+        component={LaporanJual}
+        options={{
+          headerShown: true,
+          headerTitle: 'Laporan Produk Daur Ulang',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+
+      <Stack.Screen
+        name="LaporanBeli"
+        component={LaporanBeli}
+        options={{
+          headerShown: true,
+          headerTitle: 'Laporan Pembelian',
           headerStyle: {
             backgroundColor: colors.primary,
           },
