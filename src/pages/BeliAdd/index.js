@@ -95,15 +95,19 @@ export default function BeliAdd({ navigation }) {
                     justifyContent: 'center'
                 }}>
                     <Text style={{
-                        fontSize: 13,
-                        fontFamily: fonts.secondary[800],
-                        color: colors.secondary
-                    }}>{item.kode_produk}</Text>
+                        fontSize: 12,
+                        fontFamily: fonts.secondary[600],
+                        color: colors.white,
+                        backgroundColor: colors.primary,
+                        width: 100,
+                        borderRadius: 5,
+                        textAlign: 'center'
+                    }}>{item.nama_kategori}</Text>
                     <Text style={{
                         fontSize: 13,
                         fontFamily: fonts.secondary[600],
                         color: colors.black
-                    }}>{item.nama_produk}</Text>
+                    }}>{item.kode_produk} - {item.nama_produk}</Text>
                     <Text style={{
                         fontSize: 12,
                         marginBottom: 5,
@@ -113,9 +117,13 @@ export default function BeliAdd({ navigation }) {
                     }}>{item.contoh}</Text>
                     <Text style={{
                         fontSize: 15,
-                        fontFamily: fonts.primary[600],
-                        color: colors.black
-                    }}>Rp. {new Intl.NumberFormat().format(item.harga)} / {item.satuan}</Text>
+                        fontFamily: fonts.primary[800],
+                        color: colors.secondary
+                    }}>Rp. {new Intl.NumberFormat().format(item.harga)} <Text style={{
+                        fontFamily: fonts.secondary[400],
+                        color: colors.border
+
+                    }}>/ {item.satuan}</Text></Text>
 
                 </View>
             </TouchableOpacity>
@@ -145,7 +153,7 @@ export default function BeliAdd({ navigation }) {
 
             } else {
                 setUser(res);
-                axios.post(apiURL + 'get_cart', {
+                axios.post(apiURL + 'get_bcart', {
                     fid_user: res.id
                 }).then(c => {
                     setCart(c.data)
@@ -202,7 +210,7 @@ export default function BeliAdd({ navigation }) {
                             if (user.id == 0) {
                                 Alert.alert(MYAPP, 'Harap login terlebih dahulu')
                             } else {
-                                navigation.navigate('Cart', user)
+                                navigation.navigate('BeliCart', user)
                             }
                         }} style={{
                             position: 'relative',

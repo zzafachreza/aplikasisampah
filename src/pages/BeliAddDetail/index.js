@@ -16,7 +16,7 @@ import 'intl/locale-data/jsonp/en';
 
 export default function BeliAddDetail({ navigation, route }) {
     const item = route.params;
-
+    const [jumlah, setJumlah] = useState(1)
 
     const addCart = () => {
 
@@ -30,17 +30,17 @@ export default function BeliAddDetail({ navigation, route }) {
                 const kirim = {
                     fid_user: u.id,
                     fid_barang: item.id,
-                    qty: 1,
+                    qty: jumlah,
                     harga: item.harga,
-                    total: item.harga,
+                    total: item.harga * jumlah,
                 }
 
                 console.log(kirim);
-                axios.post(apiURL + 'cart_add', kirim).then(res => {
+                axios.post(apiURL + 'bcart_add', kirim).then(res => {
                     console.log(res.data);
                     showMessage({
                         type: 'success',
-                        message: 'Berhasil ditambahkan ke keranjang'
+                        message: 'Berhasil ditambahkan ke keranjang beli'
                     })
                 })
             }
@@ -69,7 +69,7 @@ export default function BeliAddDetail({ navigation, route }) {
                     fontSize: 15,
                     flex: 1,
                     textAlign: 'center'
-                }}>{item.nama_barang}</Text>
+                }}>{item.nama_produk}</Text>
 
             </View>
 
@@ -83,7 +83,7 @@ export default function BeliAddDetail({ navigation, route }) {
                 overflow: 'hidden'
             }}>
                 <Image source={{
-                    uri: item.foto_barang
+                    uri: item.foto_produk
                 }} style={{
                     height: 200,
                     width: '100%'
@@ -104,51 +104,18 @@ export default function BeliAddDetail({ navigation, route }) {
                             fontFamily: fonts.secondary[800],
                             color: colors.black,
                             fontSize: 25,
-                        }}>Rp. {new Intl.NumberFormat().format(item.harga)}</Text>
-                        <Text style={{
-                            fontFamily: fonts.secondary[400],
-                            color: colors.text,
-                            fontStyle: 'italic',
-                            fontSize: 15,
-                        }}>Terjual {new Intl.NumberFormat().format(item.terjual)} Pcs</Text>
+                        }}>Rp. {new Intl.NumberFormat().format(item.harga)} / {item.satuan}</Text>
+
                     </View>
                     <View style={{
                         flex: 0.5,
                     }}>
                         <Text style={{
                             fontFamily: fonts.secondary[800],
-                            color: colors.black,
-                            fontSize: 15,
-                        }}>RATING</Text>
-                        <View style={{
-                            flexDirection: 'row',
-                        }}>
-                            <View style={{
-                                marginLeft: 0,
-                            }}>
-                                <Icon type='ionicon' name='star' size={15} color={colors.warning} />
-                            </View>
-                            <View style={{
-                                marginLeft: 2,
-                            }}>
-                                <Icon type='ionicon' name='star' size={15} color={colors.warning} />
-                            </View>
-                            <View style={{
-                                marginLeft: 2,
-                            }}>
-                                <Icon type='ionicon' name='star' size={15} color={colors.warning} />
-                            </View>
-                            <View style={{
-                                marginLeft: 2,
-                            }}>
-                                <Icon type='ionicon' name='star' size={15} color={colors.warning} />
-                            </View>
-                            <View style={{
-                                marginLeft: 2,
-                            }}>
-                                <Icon type='ionicon' name='star' size={15} color={colors.warning} />
-                            </View>
-                        </View>
+                            color: colors.secondary,
+                            fontSize: 20,
+                        }}>{item.kode_produk}</Text>
+
                     </View>
                 </View>
                 {/* deskripsi */}
@@ -159,15 +126,66 @@ export default function BeliAddDetail({ navigation, route }) {
                         fontFamily: fonts.secondary[800],
                         color: colors.text,
                         fontSize: 15,
-                    }}>Deskripsi Produk</Text>
+                    }}>{item.nama_kategori}</Text>
                     <Text style={{
                         fontFamily: fonts.secondary[400],
                         color: colors.text,
                         fontSize: 15,
-                    }}>{item.keterangan}</Text>
+                    }}>{item.contoh}</Text>
                 </View>
             </View>
-            <MyButton title="TAMBAH KERANJANG" radius={0} onPress={addCart} />
+
+            <View style={{
+                flexDirection: 'row',
+                paddingHorizontal: 10,
+                justifyContent: 'space-around',
+                marginVertical: 10,
+            }}>
+                <TouchableOpacity onPress={() => {
+                    if (jumlah == 1) {
+                        showMessage({
+                            message: 'Minimal Pembelian 1',
+                            type: 'info'
+                        })
+                    } else {
+                        setJumlah(jumlah - 1)
+                    }
+                }} style={{
+                    backgroundColor: colors.border,
+                    width: 100,
+                    height: 50,
+                    borderRadius: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Icon type='ionicon' name='remove' size={30} color={colors.white} />
+                </TouchableOpacity>
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+
+                    width: 100,
+                }}>
+                    <Text style={{
+                        fontFamily: fonts.secondary[800],
+                        fontSize: 25,
+                    }}>{jumlah} {item.satuan}</Text>
+                </View>
+                <TouchableOpacity onPress={() => {
+                    setJumlah(jumlah + 1)
+                }} style={{
+                    backgroundColor: colors.secondary,
+                    width: 100,
+                    height: 50,
+                    borderRadius: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Icon type='ionicon' name='add' size={30} color={colors.white} />
+                </TouchableOpacity>
+            </View>
+            <MyButton title="TAMBAH KERANJANG BELI" radius={0} onPress={addCart} />
         </SafeAreaView>
     )
 }

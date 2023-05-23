@@ -452,7 +452,7 @@ export default function Router() {
         name="BeliCart"
         component={BeliCart}
         options={{
-          headerShown: true,
+          headerShown: false,
           headerTitle: 'Selesaikan Pembelian',
           headerStyle: {
             backgroundColor: colors.primary,

@@ -198,6 +198,18 @@ export default function Jemput({ navigation }) {
                                             color: colors.black,
                                         }}>{i.kode_jemput}</Text>
                                     </View>
+                                    <View style={{
+                                        // paddingHorizontal: 10,
+                                        backgroundColor: colors.white,
+                                        borderRadius: 5,
+                                    }}>
+                                        <Text style={{
+                                            fontFamily: fonts.secondary[800],
+                                            fontSize: 14,
+
+                                            color: colors.tertiary,
+                                        }}>{i.nama_lengkap}</Text>
+                                    </View>
 
                                     <View>
                                         <Text style={{

@@ -1,6 +1,6 @@
 import { Alert, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
-import { colors, fonts } from '../../utils';
+import { colors, fonts, windowWidth } from '../../utils';
 import { MYAPP, apiURL, getData } from '../../utils/localStorage';
 import axios from 'axios';
 import moment from 'moment';
@@ -68,10 +68,25 @@ export default function BeliDetail({ navigation, route }) {
                 }}>
 
                     <Text style={{
-                        fontFamily: fonts.secondary[600],
+                        fontFamily: fonts.secondary[800],
                         textAlign: 'center',
-                        fontSize: 15,
+                        color: colors.secondary,
+                        fontSize: 20,
+                        marginBottom: 10,
                     }}>{item.kode}</Text>
+
+                    <Text style={{
+                        fontFamily: fonts.secondary[600],
+                        fontSize: 15,
+                    }}>Foto Barang Pembelian</Text>
+
+                    <Image style={{
+                        width: '100%',
+                        borderRadius: 10,
+                        height: 200,
+                    }} source={{
+                        uri: item.foto_beli
+                    }} />
 
                     <View style={{
                         flexDirection: 'row',
@@ -87,28 +102,11 @@ export default function BeliDetail({ navigation, route }) {
                             flex: 1,
                             paddingLeft: 5,
                         }}>
-                            <MyList l="Nama Pelanggan" v={item.nama_lengkap} />
+                            <MyList l="Bank Sampah Unit (BSU)" v={item.nama_lengkap} />
                         </View>
 
                     </View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between'
-                    }}>
-                        <View style={{
-                            flex: 1,
-                            paddingRight: 5,
-                        }}>
-                            <MyList l="Jenis Penjemputan" v={item.jenis} />
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            paddingLeft: 5,
-                        }}>
-                            <MyList l="Alamat Penjemputan" v={item.alamat_kirim} />
-                        </View>
 
-                    </View>
                     <Text style={{
                         marginVertical: 5,
                         fontFamily: fonts.secondary[600],
@@ -184,41 +182,28 @@ export default function BeliDetail({ navigation, route }) {
             </ScrollView>
 
 
+
             <View style={{
-                flexDirection: 'row',
-                alignItems: 'center'
+                padding: 10,
+
             }}>
-                <View style={{
-                    padding: 10,
-                    backgroundColor: colors.tertiary,
-                    flex: 1,
-                    height: 50,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Text style={{
-                        fontFamily: fonts.secondary[800],
-                        color: colors.white,
-                        fontSize: 20,
-                    }}>TOTAL</Text>
-                </View>
-                <View style={{
-                    padding: 10,
-                    flex: 1,
-                    height: 50,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Text style={{
-                        fontFamily: fonts.secondary[800],
-                        color: colors.secondary,
-                        fontSize: 20,
-                    }}>Rp. {new Intl.NumberFormat().format(item.total)}</Text>
-                </View>
+                <Text style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.black,
+                    fontSize: 15,
+                }}>Estimasi Total</Text>
+                <Text style={{
+                    fontFamily: fonts.secondary[800],
+                    color: colors.secondary,
+                    fontSize: 20,
+                }}>Rp. {new Intl.NumberFormat().format(item.total)} <Text style={{
+                    fontSize: 14,
+                    color: colors.black
+                }}>/ {data.length} Jenis</Text></Text>
             </View>
 
 
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 

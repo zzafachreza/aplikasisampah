@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Dimensions, TextInput } from 'react-native'
+import { Alert, StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Dimensions, TextInput, PermissionsAndroid } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { apiURL, getData, MYAPP, storeData } from '../../utils/localStorage';
@@ -17,14 +17,77 @@ import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import { color } from 'react-native-elements/dist/helpers';
 import { Linking } from 'react-native';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
 
 export default function BeliCart({ navigation }) {
 
+    const requestCameraPermission = async () => {
+        try {
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+                {
+                    title: 'Cool Photo App Camera Permission',
+                    message:
+                        'Cool Photo App needs access to your camera ' +
+                        'so you can take awesome pictures.',
+                    buttonNeutral: 'Ask Me Later',
+                    buttonNegative: 'Cancel',
+                    buttonPositive: 'OK',
+                },
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                // console.log('You can use the camera');
+            } else {
+                // console.log('Camera permission denied');
+            }
+        } catch (err) {
+            console.warn(err);
+        }
+    };
+
+    const options = {
+        includeBase64: true,
+        quality: 0.3,
+        maxWidth: 500,
+        maxHeight: 500
+    };
+
+    const getGallery = xyz => {
+
+
+        launchCamera(options, response => {
+            // console.log('All Response = ', response);
+
+            // console.log('Ukuran = ', response.fileSize);
+            if (response.didCancel) {
+                // console.log('User cancelled image picker');
+            } else if (response.error) {
+                // console.log('Image Picker Error: ', response.error);
+            } else {
+                if (response.fileSize <= 2000000) {
+                    let source = { uri: response.uri };
+                    switch (xyz) {
+                        case 1:
+                            setKirim({
+                                ...kirim,
+                                foto_beli: `data:${response.type};base64, ${response.base64}`,
+                            });
+                            break;
+                    }
+                } else {
+                    showMessage({
+                        message: 'Ukuran Foto Terlalu Besar Max 500 KB',
+                        type: 'danger',
+                    });
+                }
+            }
+        });
+    };
+
     const [kirim, setKirim] = useState({
-        jenis: 'DI ANTAR',
-        alamat_kirim: '',
+        foto_beli: 'https://zavalabs.com/nogambar.jpg'
     })
     const [tmp, setTmp] = useState([]);
     const [cart, setCart] = useState(0);
@@ -47,12 +110,12 @@ export default function BeliCart({ navigation }) {
     const sendServer = () => {
         // setLoading(true);
         console.log(kirim);
-        axios.post(apiURL + 'jual_add', kirim).then(rs => {
+        axios.post(apiURL + 'beli_add', kirim).then(rs => {
             console.log(rs.data);
 
-            Alert.alert(MYAPP, 'Transaksi Berhasil Disimpan !');
-            Linking.openURL(rs.data)
-            navigation.replace('Home')
+            // Alert.alert(MYAPP, 'Transaksi Berhasil Disimpan !');
+            // Linking.openURL(rs.data)
+            // navigation.replace('HomeAdmin')
         })
         // setTimeout(() => {
 
@@ -60,35 +123,43 @@ export default function BeliCart({ navigation }) {
         // }, 1000)
     }
 
-
+    const [jemput, setJemput] = useState([]);
     const __getTransaction = () => {
         setLoading(true);
-        getData('user').then(res => {
-            setUser(res);
-            setKirim({
-                ...kirim,
-                fid_user: res.id
-            })
-            axios.post(apiURL + 'get_cart', {
-                fid_user: res.id
-            }).then(c => {
-                setCart(c.data);
 
-                console.log(c.data);
-            })
-            axios.post(apiURL + 'cart', {
-                fid_user: res.id
-            }).then(cc => {
-                setTotal(cc.data.total);
-                setData(cc.data.data);
+        axios.post(apiURL + 'get_jemput').then(jp => {
+            setJemput(jp.data);
+            console.log(jp.data);
+            getData('user').then(res => {
+                setUser(res);
                 setKirim({
                     ...kirim,
-                    fid_user: res.id,
-                    total: cc.data.total
+                    fid_user: res.id
                 })
-                setLoading(false);
-            })
-        });
+                axios.post(apiURL + 'get_bcart', {
+                    fid_user: res.id
+                }).then(c => {
+                    setCart(c.data);
+
+                    console.log(c.data);
+                })
+                axios.post(apiURL + 'bcart', {
+                    fid_user: res.id
+                }).then(cc => {
+                    setTotal(cc.data.total);
+                    setData(cc.data.data);
+                    setKirim({
+                        ...kirim,
+                        kode_jemput: jp.data[0].value,
+                        fid_user: res.id,
+                        total: cc.data.total
+                    })
+                    setLoading(false);
+                })
+            });
+        })
+
+
 
 
 
@@ -139,8 +210,8 @@ export default function BeliCart({ navigation }) {
                                 color: colors.white,
                                 fontSize: 15,
                                 fontFamily: fonts.secondary[600]
-                            }}>Keranjang Belanja</Text>
-                            <TouchableOpacity onPress={() => navigation.navigate('Cart', user)} style={{
+                            }}>Detail Pembelian</Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('BeliCart', user)} style={{
                                 position: 'relative',
                                 height: 50,
                                 width: 50,
@@ -171,6 +242,47 @@ export default function BeliCart({ navigation }) {
 
                     </View>
 
+                    <View style={{
+                        padding: 10,
+                        backgroundColor: colors.white
+                    }}>
+
+                        <TouchableOpacity onPress={() => getGallery(1)} style={{
+                            width: '100%',
+                            height: 150,
+                            padding: 10,
+                            overflow: 'hidden',
+                            borderWidth: 1,
+                            borderRadius: 10,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            borderColor: colors.border
+                        }}>
+                            {kirim.foto_beli !== 'https://zavalabs.com/nogambar.jpg' && <Image source={{
+                                uri: kirim.foto_beli
+                            }} style={{
+                                width: '110%',
+                                height: 150,
+                            }} />}
+                            {kirim.foto_beli == 'https://zavalabs.com/nogambar.jpg' && <Image source={require('../../assets/camera.png')} style={{
+                                width: 40,
+                                height: 40,
+                            }} />}
+                        </TouchableOpacity>
+
+                        <MyGap jarak={10} />
+
+
+                        <MyPicker value={kirim.jenis} label="Bank Sampah Unit (BSU) / Penjemputan" data={jemput} onValueChange={x => {
+                            setKirim({
+                                ...kirim,
+                                kode_jemput: x
+                            })
+                        }} />
+
+
+                    </View>
+
 
                     <ScrollView style={{
                         padding: 10,
@@ -193,7 +305,7 @@ export default function BeliCart({ navigation }) {
                                         padding: 10,
                                     }}>
                                         <Image source={{
-                                            uri: i.foto_barang
+                                            uri: i.foto_produk
                                         }} style={{
                                             width: 60,
                                             height: 60,
@@ -208,7 +320,7 @@ export default function BeliCart({ navigation }) {
                                         <Text style={{
                                             fontFamily: fonts.secondary[400],
                                             fontSize: 15,
-                                        }}>{i.nama_barang}</Text>
+                                        }}>{i.nama_produk}</Text>
                                         <View style={{
                                             flexDirection: 'row'
                                         }}>
@@ -216,12 +328,12 @@ export default function BeliCart({ navigation }) {
                                                 flex: 1,
                                                 fontFamily: fonts.secondary[600],
                                                 fontSize: 15,
-                                            }}>{new Intl.NumberFormat().format(i.harga)} x {i.qty}</Text>
+                                            }}>{new Intl.NumberFormat().format(i.harga)} x {i.qty} {i.satuan}</Text>
                                             <Text style={{
                                                 fontFamily: fonts.secondary[800],
                                                 fontSize: 15,
-                                                color: colors.secondary
-                                            }}>{new Intl.NumberFormat().format(i.total)}</Text>
+                                                color: colors.black
+                                            }}>Rp. {new Intl.NumberFormat().format(i.total)}</Text>
                                         </View>
 
                                     </View>
@@ -231,7 +343,7 @@ export default function BeliCart({ navigation }) {
                                             {
                                                 text: 'HAPUS', onPress: () => {
                                                     setLoading(true)
-                                                    axios.post(apiURL + 'cart_hapus', {
+                                                    axios.post(apiURL + 'bcart_hapus', {
                                                         id: i.id
                                                     }).then(r => {
                                                         console.log(r.data);
@@ -244,7 +356,7 @@ export default function BeliCart({ navigation }) {
                                         justifyContent: 'center',
                                         alignItems: 'center',
                                         flex: 1,
-                                        backgroundColor: colors.primary,
+                                        backgroundColor: colors.secondary,
                                         padding: 5,
                                     }}>
                                         <Icon type='ionicon' name='trash' color={colors.white} />
@@ -260,43 +372,37 @@ export default function BeliCart({ navigation }) {
                 </View>
 
 
-                <View style={{
-                    padding: 10,
-                    backgroundColor: colors.white
-                }}>
-                    <MyPicker value={kirim.jenis} label="Jenis Pengiriman" data={[
-                        { label: 'DI ANTAR', value: 'DI ANTAR' },
-                        { label: 'AMBIL DITEMPAT', value: 'AMBIL DITEMPAT' },
-                    ]} onValueChange={x => {
-                        setKirim({
-                            ...kirim,
-                            jenis: x
-                        })
-                    }} />
 
-                    <MyInput label="Alamat Pengiriman" multiline value={kirim.alamat_kirim} onChangeText={x => {
-                        setKirim({
-                            ...kirim,
-                            alamat_kirim: x
-                        })
-                    }} />
-
-                </View>
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
                     backgroundColor: colors.white
 
                 }}>
-                    <Text style={{
-                        flex: 1,
-                        fontFamily: fonts.secondary[800],
-                        fontSize: 22,
-                        textAlign: 'center',
-                        color: colors.secondary
-                    }}>Rp. {new Intl.NumberFormat().format(total)}</Text>
                     <View style={{
-                        backgroundColor: colors.primary,
+                        flex: 1,
+                        paddingLeft: 10,
+                    }}>
+
+                        <Text style={{
+
+                            fontFamily: fonts.secondary[600],
+                            fontSize: 15,
+                            color: colors.black
+                        }}>Estimasi Total</Text>
+                        <Text style={{
+
+                            fontFamily: fonts.secondary[800],
+                            fontSize: 22,
+
+                            color: colors.secondary
+                        }}>Rp. {new Intl.NumberFormat().format(total)} <Text style={{
+                            fontSize: 14,
+                            color: colors.black
+                        }}>/ {data.length} Jenis</Text></Text>
+                    </View>
+                    <View style={{
+                        backgroundColor: colors.secondary,
                         flex: 1,
                     }}>
                         <TouchableOpacity onPress={sendServer} style={{
@@ -307,7 +413,7 @@ export default function BeliCart({ navigation }) {
                                 fontFamily: fonts.secondary[800],
                                 fontSize: 22,
                                 color: colors.white
-                            }}>CHECKOUT</Text>
+                            }}>PROSES</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
