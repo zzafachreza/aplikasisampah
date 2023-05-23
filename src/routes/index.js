@@ -55,6 +55,12 @@ import {
   JemputEdit,
   Jual,
   JualDetail,
+  HomeDetail,
+  Beli,
+  BeliAdd,
+  BeliCart,
+  BeliDetail,
+  BeliAddDetail,
 } from '../pages';
 import { colors } from '../utils';
 import { Icon } from 'react-native-elements';
@@ -410,8 +416,93 @@ export default function Router() {
         }}
       />
 
+
+      {/* BELI */}
+
+      <Stack.Screen
+        name="Beli"
+        component={Beli}
+        options={{
+          headerShown: true,
+          headerTitle: 'Daftar Pembelian',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+
+      <Stack.Screen
+        name="BeliAdd"
+        component={BeliAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Tambah Pembelian',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+
+
+      <Stack.Screen
+        name="BeliCart"
+        component={BeliCart}
+        options={{
+          headerShown: true,
+          headerTitle: 'Selesaikan Pembelian',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+
+      <Stack.Screen
+        name="BeliDetail"
+        component={BeliDetail}
+        options={{
+          headerShown: true,
+          headerTitle: 'Detail Pembelian',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="BeliAddDetail"
+        component={BeliAddDetail}
+        options={{
+          headerShown: false,
+          headerTitle: 'Detail Pembelian',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
       {/* END USER */}
 
+
+      <Stack.Screen
+        name="HomeDetail"
+        component={HomeDetail}
+        options={{
+          headerShown: false,
+          headerTitle: 'Detail Penjualan',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
 
       <Stack.Screen
         name="BarangDetail"

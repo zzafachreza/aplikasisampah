@@ -62,13 +62,18 @@ import JemputDetail from './JemputDetail';
 import JemputEdit from './JemputEdit';
 import Jual from './Jual';
 import JualDetail from './JualDetail';
+import HomeDetail from './HomeDetail';
+import Beli from './Beli';
+import BeliAdd from './BeliAdd';
+import BeliCart from './BeliCart';
+import BeliDetail from './BeliDetail';
+import BeliAddDetail from './BeliAddDetail';
 
 
 
 
 
 // NEW APK SAMPAH
-
 
 
 
@@ -167,5 +172,15 @@ export {
 
   // Penjualan
   Jual,
-  JualDetail
+  JualDetail,
+
+  HomeDetail,
+
+  // Pembelian
+  Beli,
+  BeliAdd,
+  BeliCart,
+  BeliDetail,
+  BeliAddDetail
+
 };

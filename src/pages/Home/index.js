@@ -311,7 +311,7 @@ export default function Home({ navigation }) {
                 fontFamily: fonts.secondary[600],
                 color: colors.foourty
               }}>Produk Unggulan</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('HomeDetail')}>
                 <Text style={{
                   fontFamily: fonts.secondary[600],
                   color: colors.primary

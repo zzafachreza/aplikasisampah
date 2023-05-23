@@ -15,7 +15,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import moment from 'moment';
 
-export default function Jual({ navigation }) {
+export default function Beli({ navigation }) {
 
     const [data, setData] = useState([]);
     const [tmp, setTmp] = useState([]);
@@ -31,7 +31,7 @@ export default function Jual({ navigation }) {
 
 
     const getTransaction = () => {
-        axios.post(apiURL + 'jual').then(res => {
+        axios.post(apiURL + 'beli').then(res => {
             setData(res.data);
             setTmp(res.data);
             console.log(res.data)
@@ -97,7 +97,7 @@ export default function Jual({ navigation }) {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {data.map(i => {
                         return (
-                            <TouchableOpacity onPress={() => navigation.navigate('JualDetail', i)} style={{
+                            <TouchableOpacity onPress={() => navigation.navigate('BeliDetail', i)} style={{
                                 borderWidth: 1,
                                 marginVertical: 5,
                                 padding: 10,
@@ -164,7 +164,18 @@ export default function Jual({ navigation }) {
                     })}
                 </ScrollView>
             </View>
-
+            <TouchableOpacity onPress={() => navigation.navigate('BeliAdd')} style={{
+                padding: 20,
+                backgroundColor: colors.primary,
+                justifyContent: 'center',
+                alignItems: 'center'
+            }}>
+                <Text style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.white,
+                    fontSize: 15,
+                }}>TAMBAH PEMBELIAN</Text>
+            </TouchableOpacity>
         </SafeAreaView >
     )
 }
