@@ -299,15 +299,16 @@ export default function Home({ navigation }) {
           {/* produk unggulan */}
 
           <View style={{
-            marginTop: 10,
-            marginHorizontal: 10,
+
           }}>
 
             <View style={{
-              flexDirection: 'row'
+              flexDirection: 'row',
+              margin: 10,
             }}>
               <Text style={{
                 flex: 1,
+
                 fontFamily: fonts.secondary[600],
                 color: colors.foourty
               }}>Produk Unggulan</Text>

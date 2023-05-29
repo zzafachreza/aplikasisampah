@@ -11,10 +11,10 @@ import { showMessage } from 'react-native-flash-message';
 const MyList = ({ l, v }) => {
     return (
         <View style={{
-            marginVertical: 5,
+            marginVertical: 2,
         }}>
             <Text style={{
-                marginVertical: 5,
+                marginVertical: 2,
                 fontFamily: fonts.secondary[600],
                 fontSize: 15
             }}>{l}</Text>
@@ -89,21 +89,14 @@ export default function BeliDetail({ navigation, route }) {
                     }} />
 
                     <View style={{
-                        flexDirection: 'row',
+
                         justifyContent: 'space-between'
                     }}>
-                        <View style={{
-                            flex: 1,
-                            paddingRight: 5,
-                        }}>
-                            <MyList l="Tanggal Penjualan" v={moment(item.tanggal).format('dddd, DD MMM YYYY') + ' ' + item.jam} />
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            paddingLeft: 5,
-                        }}>
-                            <MyList l="Bank Sampah Unit (BSU)" v={item.nama_lengkap} />
-                        </View>
+
+                        <MyList l="Tanggal Penjualan" v={moment(item.tanggal).format('dddd, DD MMM YYYY') + ' ' + item.jam} />
+
+                        <MyList l="Bank Sampah Unit (BSU)" v={item.nama_lengkap} />
+
 
                     </View>
 

@@ -17,7 +17,7 @@ import moment from 'moment';
 import DatePicker from 'react-native-datepicker'
 
 
-export default function LaporanBeli({ navigation }) {
+export default function LaporanBeliDetail({ navigation, route }) {
 
     const [data, setData] = useState({});
     const [kategori, setKategori] = useState([]);
@@ -54,7 +54,7 @@ export default function LaporanBeli({ navigation }) {
                 setLoading(false)
             }, 1000)
 
-
+            console.log(res.data.kategori)
         });
     }
 
@@ -176,59 +176,6 @@ export default function LaporanBeli({ navigation }) {
 
                     {/* Kategori */}
 
-                    <Text style={{
-                        color: colors.black,
-                        textAlign: 'center',
-                        fontFamily: fonts.secondary[600],
-                        fontSize: 15,
-                        marginBottom: 10,
-                    }}>JUMLAH PEMBELIAN SAMPAH</Text>
-
-                    <View style={{
-                        flexDirection: 'row',
-                        marginBottom: 10,
-                    }}>
-                        <View style={{
-                            flex: 1,
-                            marginRight: 10,
-                            backgroundColor: '#E47B1A',
-                            padding: 10,
-                            borderRadius: 5,
-                        }}>
-                            <Text style={{
-                                color: colors.white,
-                                textAlign: 'right',
-                                fontFamily: fonts.secondary[600],
-                                fontSize: 20,
-                            }}>Pcs</Text>
-                            <Text style={{
-                                color: colors.white,
-                                textAlign: 'right',
-                                fontFamily: fonts.secondary[600],
-                                fontSize: 30,
-                            }}>{data.pcs == null ? 0 : new Intl.NumberFormat().format(parseInt(data.pcs))}</Text>
-                        </View>
-                        <View style={{
-                            marginLeft: 10,
-                            borderRadius: 5,
-                            flex: 1,
-                            backgroundColor: '#54C05F',
-                            padding: 10,
-                        }}>
-                            <Text style={{
-                                color: colors.white,
-                                textAlign: 'right',
-                                fontFamily: fonts.secondary[600],
-                                fontSize: 20,
-                            }}>Kg</Text>
-                            <Text style={{
-                                color: colors.white,
-                                textAlign: 'right',
-                                fontFamily: fonts.secondary[600],
-                                fontSize: 30,
-                            }}>{data.kg == null ? 0 : new Intl.NumberFormat().format(parseInt(data.kg))}</Text>
-                        </View>
-                    </View>
                     <View style={{
                         marginBottom: 10,
                         borderWidth: 1,

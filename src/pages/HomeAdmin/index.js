@@ -161,7 +161,7 @@ export default function HomeAdmin({ navigation }) {
                   fontFamily: fonts.secondary[600],
                   fontSize: 20,
                   color: colors.white
-                }}>Penimbangan</Text>
+                }}>Pembelian</Text>
                 <Text style={{
                   fontFamily: fonts.secondary[800],
                   fontSize: 40,

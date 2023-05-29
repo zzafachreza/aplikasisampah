@@ -65,7 +65,7 @@ export default function AAAtur({ navigation }) {
                     fontFamily: fonts.primary[600],
                     fontSize: windowWidth / 18,
                     color: colors.white
-                }}>{MYAPP}</Text>
+                }}>Profile</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('Account')} style={{
                     padding: 5,
                     backgroundColor: colors.white,

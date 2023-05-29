@@ -11,10 +11,10 @@ import { showMessage } from 'react-native-flash-message';
 const MyList = ({ l, v }) => {
     return (
         <View style={{
-            marginVertical: 5,
+            marginVertical: 2,
         }}>
             <Text style={{
-                marginVertical: 5,
+                marginVertical: 2,
                 fontFamily: fonts.secondary[600],
                 fontSize: 15
             }}>{l}</Text>
@@ -73,42 +73,19 @@ export default function JualDetail({ navigation, route }) {
                         fontSize: 15,
                     }}>{item.kode}</Text>
 
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between'
-                    }}>
-                        <View style={{
-                            flex: 1,
-                            paddingRight: 5,
-                        }}>
-                            <MyList l="Tanggal Penjualan" v={moment(item.tanggal).format('dddd, DD MMM YYYY') + ' ' + item.jam} />
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            paddingLeft: 5,
-                        }}>
-                            <MyList l="Nama Pelanggan" v={item.nama_lengkap} />
-                        </View>
 
-                    </View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between'
-                    }}>
-                        <View style={{
-                            flex: 1,
-                            paddingRight: 5,
-                        }}>
-                            <MyList l="Jenis Penjemputan" v={item.jenis} />
-                        </View>
-                        <View style={{
-                            flex: 1,
-                            paddingLeft: 5,
-                        }}>
-                            <MyList l="Alamat Penjemputan" v={item.alamat_kirim} />
-                        </View>
+                    <MyList l="Tanggal Penjualan" v={moment(item.tanggal).format('dddd, DD MMM YYYY') + ' ' + item.jam} />
 
-                    </View>
+                    <MyList l="Nama Pelanggan" v={item.nama_lengkap} />
+
+
+
+                    <MyList l="Jenis Penjemputan" v={item.jenis} />
+
+                    <MyList l="Alamat Penjemputan" v={item.alamat_kirim} />
+
+
+
                     <Text style={{
                         marginVertical: 5,
                         fontFamily: fonts.secondary[600],

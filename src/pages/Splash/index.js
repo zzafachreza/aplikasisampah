@@ -73,7 +73,7 @@ export default function Splash({ navigation }) {
         marginTop: 20,
         fontFamily: fonts.secondary[600],
         fontSize: 20
-      }}>Nama Aplikasi</Text>
+      }}>SIMBA</Text>
     </View>
   );
 }

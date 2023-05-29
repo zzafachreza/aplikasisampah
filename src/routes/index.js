@@ -66,7 +66,8 @@ import {
   MasterAkun,
   MasterAkunDetail,
   MasterAkunAdd,
-  MasterAkunEdit
+  MasterAkunEdit,
+  LaporanBeliDetail
 } from '../pages';
 import { colors } from '../utils';
 import { Icon } from 'react-native-elements';
@@ -568,6 +569,19 @@ export default function Router() {
         component={LaporanBeli}
         options={{
           headerShown: true,
+          headerTitle: 'Laporan Pembelian',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="LaporanBeliDetail"
+        component={LaporanBeliDetail}
+        options={{
+          headerShown: false,
           headerTitle: 'Laporan Pembelian',
           headerStyle: {
             backgroundColor: colors.primary,

@@ -74,6 +74,7 @@ import MasterAkun from './MasterAkun';
 import MasterAkunAdd from './MasterAkunAdd';
 import MasterAkunDetail from './MasterAkunDetail';
 import MasterAkunEdit from './MasterAkunEdit';
+import LaporanBeliDetail from './LaporanBeliDetail';
 
 
 
@@ -191,6 +192,7 @@ export {
 
   LaporanJual,
   LaporanBeli,
+  LaporanBeliDetail,
   // master akun
 
   MasterAkun,

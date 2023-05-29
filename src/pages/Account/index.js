@@ -108,7 +108,7 @@ export default function ({ navigation, route }) {
                 <>
                     <View style={{
                         flexDirection: 'row',
-                        backgroundColor: colors.white,
+                        backgroundColor: colors.primary,
                         padding: 5,
                         height: 80,
                         borderBottomLeftRadius: 10,
@@ -118,14 +118,14 @@ export default function ({ navigation, route }) {
                         <TouchableOpacity onPress={() => navigation.goBack()} style={{
                             padding: 5,
                         }}>
-                            <Icon type='ionicon' name='arrow-back-outline' size={windowWidth / 13} color={colors.black} />
+                            <Icon type='ionicon' name='arrow-back-outline' size={windowWidth / 13} color={colors.white} />
                         </TouchableOpacity>
                         <Text style={{
                             flex: 1,
                             textAlign: 'center',
                             fontFamily: fonts.primary[400],
                             fontSize: windowWidth / 18,
-                            color: colors.black
+                            color: colors.white
                         }}>Profile Saya</Text>
                         <TouchableOpacity onPress={() => navigation.navigate('AccountEdit', user)} style={{
                             padding: 5,
@@ -135,7 +135,7 @@ export default function ({ navigation, route }) {
                                 textAlign: 'center',
                                 fontFamily: fonts.primary[400],
                                 fontSize: windowWidth / 18,
-                                color: colors.foourty
+                                color: colors.white
                             }}>Ubah</Text>
                         </TouchableOpacity>
                     </View>

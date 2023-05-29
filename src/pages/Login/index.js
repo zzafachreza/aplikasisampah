@@ -23,11 +23,11 @@ export default function ({ navigation }) {
 
     console.log(kirim);
     if (kirim.telepon == null && kirim.pin.length == 0) {
-      Alert.alert(MYAPP, 'telepon atau pin tidak bileh kosoing !');
+      Alert.alert(MYAPP, 'Telepon atau PIN Anda, Tidak Boleh Kosong !');
     } else if (kirim.pin.length == 0) {
-      Alert.alert(MYAPP, 'PIN tidak boleh kosong !');
+      Alert.alert(MYAPP, 'PIN Tidak Boleh Kosong !');
     } else if (kirim.telepon == null) {
-      Alert.alert(MYAPP, 'Telepon tidak boleh kosong ! ');
+      Alert.alert(MYAPP, 'Telepon Tidak Boleh Kosong ! ');
     } else {
 
 

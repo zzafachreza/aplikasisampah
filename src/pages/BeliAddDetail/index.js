@@ -100,6 +100,8 @@ export default function BeliAddDetail({ navigation, route }) {
                         borderBottomWidth: 1,
                         marginBottom: 10,
                     }}>
+
+
                         <Text style={{
                             fontFamily: fonts.secondary[800],
                             color: colors.black,
@@ -107,21 +109,22 @@ export default function BeliAddDetail({ navigation, route }) {
                         }}>Rp. {new Intl.NumberFormat().format(item.harga)} / {item.satuan}</Text>
 
                     </View>
-                    <View style={{
-                        flex: 0.5,
-                    }}>
-                        <Text style={{
-                            fontFamily: fonts.secondary[800],
-                            color: colors.secondary,
-                            fontSize: 20,
-                        }}>{item.kode_produk}</Text>
 
-                    </View>
                 </View>
                 {/* deskripsi */}
                 <View style={{
                     padding: 10
                 }}>
+                    <Text style={{
+                        fontFamily: fonts.secondary[800],
+                        color: colors.secondary,
+                        fontSize: 20,
+                    }}>{item.kode_produk}</Text>
+                    <Text style={{
+                        fontFamily: fonts.secondary[800],
+                        color: colors.text,
+                        fontSize: 15,
+                    }}>{item.nama_produk}</Text>
                     <Text style={{
                         fontFamily: fonts.secondary[800],
                         color: colors.text,

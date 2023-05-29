@@ -81,66 +81,65 @@ export default function MasterProduk({ navigation }) {
                 </View>
 
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    {data.map(i => {
+                    {data.map(item => {
                         return (
-                            <TouchableOpacity onPress={() => navigation.navigate('MasterProdukDetail', i)} style={{
-                                borderWidth: 1,
-                                marginVertical: 5,
-                                padding: 10,
-                                borderRadius: 5,
+                            <TouchableOpacity onPress={() => navigation.navigate('MasterProdukDetail', item)} style={{
+                                flex: 1,
+                                margin: 5,
                                 borderColor: colors.border2,
+                                borderWidth: 1,
+                                overflow: 'hidden',
+                                borderRadius: 10,
                                 flexDirection: 'row'
                             }}>
-                                <View>
-                                    <Image source={{
-                                        uri: i.foto_produk
-                                    }} style={{
+                                <View style={{
+                                    // flex: 1,
+                                    padding: 10,
+                                }}>
+                                    <Image style={{
                                         width: 80,
                                         height: 80,
-                                        borderRadius: 5,
+                                        borderRadius: 10,
+                                    }} source={{
+                                        uri: item.foto_produk
                                     }} />
                                 </View>
                                 <View style={{
-                                    // flex: 1,
-                                    paddingLeft: 10,
+                                    flex: 1,
+                                    justifyContent: 'center'
                                 }}>
-                                    <View style={{
-                                        paddingHorizontal: 10,
+                                    <Text style={{
+                                        fontSize: 12,
+                                        fontFamily: fonts.secondary[600],
+                                        color: colors.white,
                                         backgroundColor: colors.primary,
+                                        width: 100,
                                         borderRadius: 5,
-                                    }}>
-                                        <Text style={{
-                                            fontFamily: fonts.secondary[600],
-                                            fontSize: 14,
-                                            textAlign: 'center',
-                                            color: colors.white,
-                                        }}>{i.nama_kategori}</Text>
-                                    </View>
+                                        textAlign: 'center'
+                                    }}>{item.nama_kategori}</Text>
+                                    <Text style={{
+                                        fontSize: 13,
+                                        fontFamily: fonts.secondary[600],
+                                        color: colors.black
+                                    }}>{item.kode_produk} - {item.nama_produk}</Text>
+                                    <Text style={{
+                                        fontSize: 12,
+                                        marginBottom: 5,
+                                        fontStyle: 'italic',
+                                        fontFamily: fonts.secondary[200],
+                                        color: colors.border
+                                    }}>{item.contoh}</Text>
+                                    <Text style={{
+                                        fontSize: 15,
+                                        fontFamily: fonts.primary[800],
+                                        color: colors.secondary
+                                    }}>Rp. {new Intl.NumberFormat().format(item.harga)} <Text style={{
+                                        fontFamily: fonts.secondary[400],
+                                        color: colors.border
 
-                                    <View>
-                                        <Text style={{
-                                            marginVertical: 3,
-                                            fontFamily: fonts.secondary[600],
-                                            fontSize: 14,
-                                            color: colors.black,
-                                        }}>{i.kode_produk} - {i.nama_produk}</Text>
-                                        <Text style={{
-                                            marginVertical: 3,
-                                            fontFamily: fonts.secondary[200],
-                                            fontSize: 14,
-                                            color: colors.black,
-                                        }}>{i.contoh}</Text>
-                                        <Text style={{
-                                            marginVertical: 3,
-                                            fontFamily: fonts.secondary[600],
-                                            fontSize: 14,
-                                            color: colors.danger,
-                                        }}>Rp. {new Intl.NumberFormat().format(i.harga)} / {i.satuan}</Text>
-                                    </View>
+                                    }}>/ {item.satuan}</Text></Text>
 
                                 </View>
-
-
                             </TouchableOpacity>
                         )
                     })}

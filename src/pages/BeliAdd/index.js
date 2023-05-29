@@ -247,7 +247,7 @@ export default function BeliAdd({ navigation }) {
                     }}>
                         <TextInput onChangeText={x => {
                             if (x.length > 0) {
-                                const filtered = produk.filter(i => i.nama_barang.toLowerCase().indexOf(x.toLowerCase()) > -1);
+                                const filtered = produk.filter(i => i.nama_produk.toLowerCase().indexOf(x.toLowerCase()) > -1);
                                 setProduk(filtered)
                             } else if (x.length == 0) {
 
@@ -274,7 +274,8 @@ export default function BeliAdd({ navigation }) {
 
 
                     <Text style={{
-                        margin: 10,
+                        marginHorizontal: 10,
+                        marginBottom: 10,
                         fontFamily: fonts.secondary[600],
                         color: colors.foourty
                     }}>Semua Produk</Text>

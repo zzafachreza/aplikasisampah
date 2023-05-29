@@ -113,9 +113,9 @@ export default function BeliCart({ navigation }) {
         axios.post(apiURL + 'beli_add', kirim).then(rs => {
             console.log(rs.data);
 
-            // Alert.alert(MYAPP, 'Transaksi Berhasil Disimpan !');
-            // Linking.openURL(rs.data)
-            // navigation.replace('HomeAdmin')
+            Alert.alert(MYAPP, 'Transaksi Berhasil Disimpan !');
+
+            navigation.replace('HomeAdmin')
         })
         // setTimeout(() => {
 
