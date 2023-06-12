@@ -158,7 +158,7 @@ export default function Home({ navigation }) {
   const [data, setData] = useState([]);
   const [user, setUser] = useState({
     id: 0,
-    nama_lengkap: 'Eman'
+    nama_lengkap: 'Pengguna'
   });
   const isFocused = useIsFocused();
   useEffect(() => {

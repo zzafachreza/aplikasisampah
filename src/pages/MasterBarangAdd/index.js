@@ -155,7 +155,7 @@ export default function MasterBarangAdd({ navigation, route }) {
                     <MyGap jarak={10} />
 
 
-                    <MyInput label="Detail Produk" multiline value={kirim.keterangan} onChangeText={x => {
+                    <MyInput height={100} label="Detail Produk" multiline value={kirim.keterangan} onChangeText={x => {
                         setKirim({
                             ...kirim,
                             keterangan: x

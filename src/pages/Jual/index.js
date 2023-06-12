@@ -97,7 +97,7 @@ export default function Jual({ navigation }) {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {data.map(i => {
                         return (
-                            <TouchableOpacity onPress={() => navigation.navigate('JualDetail', i)} style={{
+                            <View style={{
                                 borderWidth: 1,
                                 marginVertical: 5,
                                 padding: 10,
@@ -155,11 +155,33 @@ export default function Jual({ navigation }) {
 
                                 </View>
 
-                                <View>
-                                    <Icon type='ionicon' name='chevron-forward' />
-                                </View>
+                                <TouchableOpacity onPress={() => navigation.navigate('JualDetail', i)} >
+                                    <Icon type='ionicon' name='search' />
+                                </TouchableOpacity>
 
-                            </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    marginLeft: 20,
+                                }} onPress={() => Alert.alert(MYAPP, `Apakah kamu yakin akan hapus transaksi ${i.kode} ini ?`, [
+                                    { text: 'TIDAK' },
+                                    {
+                                        text: 'HAPUS',
+                                        onPress: () => {
+                                            axios.post(apiURL + 'jual_delete', {
+                                                kode: i.kode
+                                            }).then(res => {
+                                                showMessage({
+                                                    message: 'Berhasil di hapus !',
+                                                    type: 'success'
+                                                })
+                                                getTransaction();
+                                            })
+                                        }
+                                    }
+                                ])} >
+                                    <Icon type='ionicon' name='trash' color={colors.danger} />
+                                </TouchableOpacity>
+
+                            </View>
                         )
                     })}
                 </ScrollView>

@@ -31,11 +31,16 @@ export default function Jemput({ navigation }) {
 
 
     const getTransaction = () => {
-        axios.post(apiURL + 'jemput').then(res => {
-            setData(res.data);
-            setTmp(res.data);
-            console.log(res.data)
-        });
+        getData('user').then(uu => {
+            axios.post(apiURL + 'jemput', {
+                fid_user: uu.id,
+                level: uu.level
+            }).then(res => {
+                setData(res.data);
+                setTmp(res.data);
+                console.log(res.data)
+            });
+        })
     }
 
     const getFilter = (x) => {
@@ -152,7 +157,7 @@ export default function Jemput({ navigation }) {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {data.map(i => {
                         return (
-                            <TouchableOpacity onPress={() => navigation.navigate('JemputDetail', i)} style={{
+                            <View style={{
                                 borderWidth: 1,
                                 marginVertical: 5,
                                 padding: 10,
@@ -171,7 +176,7 @@ export default function Jemput({ navigation }) {
                                     }} />
                                 </View>
                                 <View style={{
-                                    // flex: 1,
+                                    flex: 1,
                                     paddingLeft: 10,
                                 }}>
                                     <View style={{
@@ -243,8 +248,36 @@ export default function Jemput({ navigation }) {
 
                                 </View>
 
+                                <TouchableOpacity onPress={() => navigation.navigate('JemputDetail', i)}>
+                                    <Icon type='ionicon' name='search' />
+                                </TouchableOpacity>
 
-                            </TouchableOpacity>
+                                <TouchableOpacity style={{
+                                    marginLeft: 20,
+                                }} onPress={() => Alert.alert(MYAPP, `Apakah kamu yakin akan hapus transaksi ${i.kode_jemput} ini ?`, [
+                                    { text: 'TIDAK' },
+                                    {
+                                        text: 'HAPUS',
+                                        onPress: () => {
+                                            axios.post(apiURL + 'jemput_delete', {
+                                                kode_jemput: i.kode_jemput,
+                                                foto_jemput: i.foto_jemput
+                                            }).then(res => {
+                                                console.log(res.data)
+                                                showMessage({
+                                                    message: 'Berhasil di hapus !',
+                                                    type: 'success'
+                                                })
+                                                getTransaction();
+                                            })
+                                        }
+                                    }
+                                ])} >
+                                    <Icon type='ionicon' name='trash' color={colors.danger} />
+                                </TouchableOpacity>
+
+
+                            </View>
                         )
                     })}
                 </ScrollView>

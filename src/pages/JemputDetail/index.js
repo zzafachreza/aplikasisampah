@@ -105,7 +105,7 @@ export default function JemputDetail({ navigation, route }) {
                 height: 50,
             }}>
 
-                {user.level == 'BSU' && <TouchableOpacity onPress={() => {
+                {user.level == 'BSU' && item.status_jemput !== 'SELESAI' && item.status_jemput !== 'BATAL' && <TouchableOpacity onPress={() => {
                     Alert.alert(MYAPP, 'Apakah Kamu yakin akan batalkan ini  ' + item.kode_jemput + ' ?', [
                         { text: 'TIDAK' },
                         {

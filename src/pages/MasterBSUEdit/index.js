@@ -144,7 +144,7 @@ export default function MasterBSUEdit({ navigation, route }) {
                 fontFamily: fonts.primary[800],
                 textAlign: 'center',
                 color: colors.white
-            }}>REGISTRASI</Text></TouchableOpacity>
+            }}>SIMPAN PERUBAHAN</Text></TouchableOpacity>
         </>
     );
 }
