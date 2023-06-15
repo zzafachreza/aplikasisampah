@@ -269,7 +269,7 @@ export default function LaporanBeli({ navigation }) {
                                             fontFamily: fonts.secondary[600],
                                             fontSize: 14,
                                             color: colors.black,
-                                        }}>{i.qty}</Text>
+                                        }}>{i.qty} {i.satuan}</Text>
 
 
 

@@ -41,12 +41,16 @@ export default function HomeAdmin({ navigation }) {
   const __getTransaction = () => {
     getData('user').then(res => {
       setUser(res);
+      axios.post(apiURL + 'get_informasi', {
+        fid_user: res.id,
+        level: res.level
+      }).then(info => {
+        console.log(info.data);
+        setInfo(info.data);
+      })
     });
 
-    axios.post(apiURL + 'get_informasi').then(res => {
-      console.log(res.data);
-      setInfo(res.data);
-    })
+
 
 
   }

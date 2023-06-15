@@ -127,7 +127,7 @@ export default function BeliCart({ navigation }) {
     const __getTransaction = () => {
         setLoading(true);
 
-        axios.post(apiURL + 'get_jemput').then(jp => {
+        axios.post(apiURL + 'get_jemput_beli').then(jp => {
             setJemput(jp.data);
             console.log(jp.data);
             getData('user').then(res => {

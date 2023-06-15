@@ -54,8 +54,8 @@ export default function GetStarted({ navigation }) {
                 <Text style={{
                     marginTop: 20,
                     fontFamily: fonts.secondary[600],
-                    fontSize: 20
-                }}>Nama Aplikasi</Text>
+                    fontSize: 25
+                }}>SIMBA</Text>
             </View>
             <View style={{
                 // flex: 1,
